@@ -21,7 +21,7 @@
 <body class="antialiased">
   <div class="font-[sans-serif]">
     <div
-      class="grid lg:grid-cols-2 gap-12 bg-cover bg-center sm:px-8 px-4 py-20 h-screen" style="background-image: url('/assets/img/bglaundry6.jpeg');>
+      class="grid lg:grid-cols-2 gap-12 bg-cover bg-center sm:px-8 px-4 py-20 h-screen" style="background-image: url('/assets/img/bglaundry6.jpeg')";>
       <!-- Left Section -->
       <div>
         <a href="#">
