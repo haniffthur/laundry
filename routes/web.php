@@ -53,7 +53,8 @@ Route::middleware(['auth','admin:admin'])->group(function () {
     Route::get('/admin/user/tambah', [adminController::class, 'tambahUserView']);
     Route::get('/admin/user/edit/{id}', [adminController::class, 'editUserView']);
     Route::post('/admin/user/tambah', [adminController::class, 'tambahUser']);
-    Route::post('/admin/user/edit/{id}', [adminController::class, 'editUser']);
+    Route::put('/admin/user/edit/{id}', [adminController::class, 'editUser']);
+
     Route::get('/admin/user/hapus/{id}', [adminController::class, 'hapusUser']);
     
     Route::get('/admin/transaksi', [adminController::class, 'transaksiView']);

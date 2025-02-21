@@ -117,12 +117,13 @@
 
         <table class="table table-bordered text-center">
             <thead>
-                <tr>
-                    <th>Nama</th>
-                    <th>Jumlah</th>
-                    <th>Total Pembayaran</th>
-                    <th>Kembalian</th>
-                </tr>
+            <tr>
+    <th style="color: black;">Nama</th>
+    <th style="color: black;">Jumlah</th>
+    <th style="color: black;">Total Pembayaran</th>
+    <th style="color: black;">Kembalian</th>
+</tr>
+
             </thead>
             <tbody>
                 <tr>

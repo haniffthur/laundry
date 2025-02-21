@@ -11,6 +11,8 @@ use App\Models\Member;
 use App\Models\Outlet;
 use App\Models\Paket;
 use Hash;
+use Illuminate\Http\Request;
+
 
 date_default_timezone_set('Asia/Jakarta');
 
@@ -146,23 +148,62 @@ class adminController extends Controller
     }
 
     public function tambahUser(Req $req){
-        $data = $req->all();
-        if(User::create($data)){
-            return redirect('/admin/user');
+        $req->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email', // Cek duplikasi email
+            'password' => 'required|min:6',
+            'role' => 'required|in:admin,kasir,owner',
+            'id_outlet' => 'nullable|exists:outlets,id',
+        ]);
+    
+        // Hash password sebelum disimpan
+        $data = [
+            'name' => $req->name,
+            'email' => $req->email,
+            'password' => Hash::make($req->password), // Hash password
+            'role' => $req->role,
+            'id_outlet' => $req->id_outlet,
+        ];
+    
+        // Simpan data ke database
+        if (User::create($data)) {
+            return redirect('/admin/user')->with('success', 'User berhasil ditambahkan.');
+        } else {
+            return back()->with('error', 'Data Sudah Ada');
         }
     }
 
-    public function editUser(Req $req,$id){
-        $cek = User::findOrFail($id);
+    
+    public function editUser(Request $req, $id) {
+        $user = User::findOrFail($id);
+    
+        // Validasi input
+        $req->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $id,
+            'password' => 'nullable|min:6',
+            'role' => 'required|in:admin,kasir,owner',
+            'id_outlet' => 'nullable|exists:outlets,id'
+        ]);
+    
+        // Data yang akan diperbarui
         $data = [
-            "name" => $req->nama,
+            "name" => $req->name,
             "email" => $req->email,
-            "password" => $req->password ? Hash::make($req->password) : $cek->password,
-            "role" => $req->role
+            "role" => $req->role,
+            "id_outlet" => $req->id_outlet
         ];
-
-        if($cek->update($data)){
-            return redirect('/admin/user');
+    
+        // Update password hanya jika diisi
+        if (!empty($req->password)) {
+            $data["password"] = Hash::make($req->password);
+        }
+    
+        // Simpan perubahan
+        if ($user->update($data)) {
+            return redirect('/admin/user')->with('success', 'User berhasil diperbarui!');
+        } else {
+            return redirect()->back()->with('error', 'Gagal memperbarui user.');
         }
     }
 
