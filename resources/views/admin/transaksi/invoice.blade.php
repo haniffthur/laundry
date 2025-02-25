@@ -37,7 +37,7 @@
             </tr>
         </table>
         <br><br>
-        <h6 class="w-50 text-center mx-auto fs-16">Terimakasih telah mempercayai kami, kepuasan pelanggan adalah prioritas kami. Apabila anda mengalami keluhan, silahkan kontak lewat email support@laundry.id</h6>
+        <h6 class="w-50 text-center mx-auto fs-16">Terimakasih telah mempercayai kami, kepuasan pelanggan adalah prioritas kami. Apabila anda mengalami keluhan, silahkan kontak lewat email cemarawash@gmail.com</h6>
         <br>
         <a href="/admin/transaksi/cetak/{{$get->kode_invoice}}" class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Cetak Invoice</a>
     </div>
